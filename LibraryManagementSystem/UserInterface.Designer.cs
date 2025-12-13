@@ -39,46 +39,13 @@
             this.lblRole = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblDashboard = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.txtSearchBox = new System.Windows.Forms.TextBox();
             this.btnX = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.iconBook = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lblQntyOverdue = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblQntyReturned = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.grdDashboard = new System.Windows.Forms.DataGridView();
-            this.grdBookID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grdBookName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grdBookAuthor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grdCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grdEdition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grdLanguage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grdPublisher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grdPublicationYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PnlFormLoader = new System.Windows.Forms.Panel();
             this.pnlNav.SuspendLayout();
             this.PanelUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconBook)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdDashboard)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlNav
@@ -96,6 +63,7 @@
             this.pnlNav.Name = "pnlNav";
             this.pnlNav.Size = new System.Drawing.Size(186, 538);
             this.pnlNav.TabIndex = 0;
+            this.pnlNav.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlNav_Paint);
             // 
             // btnLogout
             // 
@@ -232,24 +200,25 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // lblDashboard
+            // lblTitle
             // 
-            this.lblDashboard.AutoSize = true;
-            this.lblDashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDashboard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(161)))), ((int)(((byte)(176)))));
-            this.lblDashboard.Location = new System.Drawing.Point(213, 22);
-            this.lblDashboard.Name = "lblDashboard";
-            this.lblDashboard.Size = new System.Drawing.Size(162, 32);
-            this.lblDashboard.TabIndex = 1;
-            this.lblDashboard.Text = "Dashboard";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(161)))), ((int)(((byte)(176)))));
+            this.lblTitle.Location = new System.Drawing.Point(192, 9);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(186, 38);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "Dashboard";
             // 
             // txtSearchBox
             // 
+            this.txtSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearchBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
             this.txtSearchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearchBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.txtSearchBox.Location = new System.Drawing.Point(604, 37);
+            this.txtSearchBox.Location = new System.Drawing.Point(631, 35);
             this.txtSearchBox.Multiline = true;
             this.txtSearchBox.Name = "txtSearchBox";
             this.txtSearchBox.Size = new System.Drawing.Size(292, 20);
@@ -258,10 +227,11 @@
             // 
             // btnX
             // 
+            this.btnX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnX.FlatAppearance.BorderSize = 0;
             this.btnX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnX.ForeColor = System.Drawing.Color.White;
-            this.btnX.Location = new System.Drawing.Point(912, 0);
+            this.btnX.Location = new System.Drawing.Point(910, 0);
             this.btnX.Name = "btnX";
             this.btnX.Size = new System.Drawing.Size(25, 25);
             this.btnX.TabIndex = 3;
@@ -269,258 +239,13 @@
             this.btnX.UseVisualStyleBackColor = true;
             this.btnX.Click += new System.EventHandler(this.btnX_Click);
             // 
-            // panel2
+            // PnlFormLoader
             // 
-            this.panel2.Controls.Add(this.iconBook);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Location = new System.Drawing.Point(219, 82);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(209, 99);
-            this.panel2.TabIndex = 5;
-            // 
-            // iconBook
-            // 
-            this.iconBook.Image = global::LibraryManagementSystem.Properties.Resources.Screenshot__354_;
-            this.iconBook.Location = new System.Drawing.Point(130, 16);
-            this.iconBook.Name = "iconBook";
-            this.iconBook.Size = new System.Drawing.Size(73, 67);
-            this.iconBook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.iconBook.TabIndex = 2;
-            this.iconBook.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Nirmala UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(8, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 23);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Borrowed";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
-            this.label5.Location = new System.Drawing.Point(37, 34);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 31);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "1";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(151)))), ((int)(((byte)(176)))));
-            this.label6.Location = new System.Drawing.Point(5, 66);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(119, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Details of last 28 days";
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.pictureBox5);
-            this.panel3.Controls.Add(this.label7);
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.lblQntyOverdue);
-            this.panel3.Location = new System.Drawing.Point(448, 82);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(209, 99);
-            this.panel3.TabIndex = 6;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::LibraryManagementSystem.Properties.Resources.Screenshot__354_;
-            this.pictureBox5.Location = new System.Drawing.Point(130, 16);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(73, 67);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 2;
-            this.pictureBox5.TabStop = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(151)))), ((int)(((byte)(176)))));
-            this.label7.Location = new System.Drawing.Point(5, 66);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(119, 15);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Details of last 28 days";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Nirmala UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(8, 9);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 23);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Overdue";
-            // 
-            // lblQntyOverdue
-            // 
-            this.lblQntyOverdue.AutoSize = true;
-            this.lblQntyOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQntyOverdue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
-            this.lblQntyOverdue.Location = new System.Drawing.Point(37, 34);
-            this.lblQntyOverdue.Name = "lblQntyOverdue";
-            this.lblQntyOverdue.Size = new System.Drawing.Size(30, 31);
-            this.lblQntyOverdue.TabIndex = 4;
-            this.lblQntyOverdue.Text = "0";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblQntyReturned);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(675, 82);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(209, 99);
-            this.panel1.TabIndex = 7;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::LibraryManagementSystem.Properties.Resources.Screenshot__354_;
-            this.pictureBox2.Location = new System.Drawing.Point(130, 16);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(73, 67);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(151)))), ((int)(((byte)(176)))));
-            this.label1.Location = new System.Drawing.Point(5, 66);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Details of last 28 days";
-            // 
-            // lblQntyReturned
-            // 
-            this.lblQntyReturned.AutoSize = true;
-            this.lblQntyReturned.Font = new System.Drawing.Font("Nirmala UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQntyReturned.ForeColor = System.Drawing.Color.White;
-            this.lblQntyReturned.Location = new System.Drawing.Point(8, 9);
-            this.lblQntyReturned.Name = "lblQntyReturned";
-            this.lblQntyReturned.Size = new System.Drawing.Size(80, 23);
-            this.lblQntyReturned.TabIndex = 0;
-            this.lblQntyReturned.Text = "Returned";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
-            this.label3.Location = new System.Drawing.Point(37, 34);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 31);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "0";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::LibraryManagementSystem.Properties.Resources.Screenshot__354_;
-            this.pictureBox3.Location = new System.Drawing.Point(219, 194);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(665, 150);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Nirmala UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(268, 258);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(107, 23);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "graph ----->";
-            // 
-            // grdDashboard
-            // 
-            this.grdDashboard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.grdDashboard.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.grdDashboard.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdDashboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdDashboard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.grdBookID,
-            this.grdBookName,
-            this.grdBookAuthor,
-            this.grdCategory,
-            this.grdEdition,
-            this.grdLanguage,
-            this.grdPublisher,
-            this.grdPublicationYear});
-            this.grdDashboard.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.grdDashboard.Location = new System.Drawing.Point(227, 362);
-            this.grdDashboard.Name = "grdDashboard";
-            this.grdDashboard.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.grdDashboard.Size = new System.Drawing.Size(654, 150);
-            this.grdDashboard.TabIndex = 8;
-            // 
-            // grdBookID
-            // 
-            this.grdBookID.HeaderText = "BookID";
-            this.grdBookID.Name = "grdBookID";
-            this.grdBookID.Width = 68;
-            // 
-            // grdBookName
-            // 
-            this.grdBookName.HeaderText = "Book Title";
-            this.grdBookName.Name = "grdBookName";
-            this.grdBookName.Width = 74;
-            // 
-            // grdBookAuthor
-            // 
-            this.grdBookAuthor.HeaderText = "Book Author";
-            this.grdBookAuthor.Name = "grdBookAuthor";
-            this.grdBookAuthor.Width = 84;
-            // 
-            // grdCategory
-            // 
-            this.grdCategory.HeaderText = "Category";
-            this.grdCategory.Name = "grdCategory";
-            this.grdCategory.Width = 74;
-            // 
-            // grdEdition
-            // 
-            this.grdEdition.HeaderText = "Edition";
-            this.grdEdition.Name = "grdEdition";
-            this.grdEdition.Width = 64;
-            // 
-            // grdLanguage
-            // 
-            this.grdLanguage.HeaderText = "Language";
-            this.grdLanguage.Name = "grdLanguage";
-            this.grdLanguage.Width = 80;
-            // 
-            // grdPublisher
-            // 
-            this.grdPublisher.HeaderText = "Publisher";
-            this.grdPublisher.Name = "grdPublisher";
-            this.grdPublisher.Width = 75;
-            // 
-            // grdPublicationYear
-            // 
-            this.grdPublicationYear.HeaderText = "Publication Year";
-            this.grdPublicationYear.Name = "grdPublicationYear";
+            this.PnlFormLoader.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PnlFormLoader.Location = new System.Drawing.Point(186, 61);
+            this.PnlFormLoader.Name = "PnlFormLoader";
+            this.PnlFormLoader.Size = new System.Drawing.Size(749, 477);
+            this.PnlFormLoader.TabIndex = 4;
             // 
             // UserInterface
             // 
@@ -528,15 +253,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(935, 538);
-            this.Controls.Add(this.grdDashboard);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.PnlFormLoader);
             this.Controls.Add(this.btnX);
             this.Controls.Add(this.txtSearchBox);
-            this.Controls.Add(this.lblDashboard);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pnlNav);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -549,17 +269,6 @@
             this.PanelUser.ResumeLayout(false);
             this.PanelUser.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconBook)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdDashboard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -578,34 +287,9 @@
         private System.Windows.Forms.Button btnHistory;
         private System.Windows.Forms.Button btnBooks;
         private System.Windows.Forms.Button btnFines;
-        private System.Windows.Forms.Label lblDashboard;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox txtSearchBox;
         private System.Windows.Forms.Button btnX;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.PictureBox iconBook;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lblQntyOverdue;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblQntyReturned;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DataGridView grdDashboard;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grdBookID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grdBookName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grdBookAuthor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grdCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grdEdition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grdLanguage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grdPublisher;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grdPublicationYear;
+        private System.Windows.Forms.Panel PnlFormLoader;
     }
 }

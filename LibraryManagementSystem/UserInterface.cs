@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using LibraryManagementSystem.UserInterface_Forms;
 
 namespace LibraryManagementSystem
 {
@@ -42,11 +43,11 @@ namespace LibraryManagementSystem
 
             // Add designer controls to navigation list only if they exist
             // (defensive to avoid null reference if designer is changed)
-            if (btnDashboard != null) navigationButtons.Add(btnDashboard);
-            if (btnBooks != null) navigationButtons.Add(btnBooks);
-            if (btnFines != null) navigationButtons.Add(btnFines);
-            if (btnHistory != null) navigationButtons.Add(btnHistory);
-            if (btnSettings != null) navigationButtons.Add(btnSettings);
+           // if (btnDashboard != null) navigationButtons.Add(btnDashboard);
+          //  if (btnBooks != null) navigationButtons.Add(btnBooks);
+           // if (btnFines != null) navigationButtons.Add(btnFines);
+           // if (btnHistory != null) navigationButtons.Add(btnHistory);
+           // if (btnSettings != null) navigationButtons.Add(btnSettings);
 
             // Default navigation state - only if dashboard button exists
             if (btnDashboard != null)
@@ -120,29 +121,62 @@ namespace LibraryManagementSystem
 
         }
 
-        private void btnDashboard_Click(object sender, EventArgs e)
+      private void btnDashboard_Click(object sender, EventArgs e)
         {
             ActivateButton(btnDashboard);
+
+         //   lblTitle.Text = "Dashboard";
+          //  this.PnlFormLoader.Controls.Clear();
+          //  frmDashboard Frmdashboard_vrb = new frmDashboard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+        //    Frmdashboard_vrb.FormBorderStyle = FormBorderStyle.None;
+         //   this.PnlFormLoader.Controls.Add(Frmdashboard_vrb);
+         //   Frmdashboard_vrb.Show();
         }
 
         private void btnBooks_Click(object sender, EventArgs e)
         {
             ActivateButton(btnBooks);
+
+         //   lblTitle.Text = "Books";
+        //    this.PnlFormLoader.Controls.Clear();
+          //  frmBooks FrmBooks_vrb = new frmBooks() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+         //   FrmBooks_vrb.FormBorderStyle = FormBorderStyle.None;
+          //  this.PnlFormLoader.Controls.Add(FrmBooks_vrb);
+          //  FrmBooks_vrb.Show();
         }
 
         private void btnFines_Click(object sender, EventArgs e)
         {
             ActivateButton(btnFines);
+          //  lblTitle.Text = "Fines";
+         //   this.PnlFormLoader.Controls.Clear();
+        //    frmFines FrmFines_vrb = new frmFines() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+        //    FrmFines_vrb.FormBorderStyle = FormBorderStyle.None;
+         //   this.PnlFormLoader.Controls.Add(FrmFines_vrb);
+          //  FrmFines_vrb.Show();
         }
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
             ActivateButton(btnHistory);
+          //  lblTitle.Text = "History";
+          //  this.PnlFormLoader.Controls.Clear();
+         //   frmHistory FrmHistory_vrb = new frmHistory() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+          //  FrmHistory_vrb.FormBorderStyle = FormBorderStyle.None;
+         //   this.PnlFormLoader.Controls.Add(FrmHistory_vrb);
+          //  FrmHistory_vrb.Show();
+
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
             ActivateButton(btnSettings);
+         //   lblTitle.Text = "Settings";
+         //   this.PnlFormLoader.Controls.Clear();
+        //    frmSettings FrmSettings_vrb = new frmSettings() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+         //   FrmSettings_vrb.FormBorderStyle = FormBorderStyle.None;
+         //   this.PnlFormLoader.Controls.Add(FrmSettings_vrb);
+         //   FrmSettings_vrb.Show();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -167,5 +201,11 @@ namespace LibraryManagementSystem
         {
 
         }
+
+        private void pnlNav_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+  
     }
 }
