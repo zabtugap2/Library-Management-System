@@ -16,5 +16,10 @@ namespace LibraryManagementSystem.UserInterface_Forms
         {
             InitializeComponent();
         }
+
+        private void lblUserName_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
