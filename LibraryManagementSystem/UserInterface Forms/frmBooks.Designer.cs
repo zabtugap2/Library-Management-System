@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlBookDetails = new System.Windows.Forms.Panel();
+            this.btnBorrow = new System.Windows.Forms.Button();
+            this.btnReserve = new System.Windows.Forms.Button();
             this.lblLocation = new System.Windows.Forms.Label();
             this.lblNumberPages = new System.Windows.Forms.Label();
             this.lblEdition = new System.Windows.Forms.Label();
@@ -47,8 +49,6 @@
             this.pctBook = new System.Windows.Forms.PictureBox();
             this.label46 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
-            this.btnReserve = new System.Windows.Forms.Button();
-            this.btnBorrow = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -141,6 +141,26 @@
             this.pnlBookDetails.Name = "pnlBookDetails";
             this.pnlBookDetails.Size = new System.Drawing.Size(334, 281);
             this.pnlBookDetails.TabIndex = 2;
+            // 
+            // btnBorrow
+            // 
+            this.btnBorrow.ForeColor = System.Drawing.Color.Black;
+            this.btnBorrow.Location = new System.Drawing.Point(184, 248);
+            this.btnBorrow.Name = "btnBorrow";
+            this.btnBorrow.Size = new System.Drawing.Size(120, 23);
+            this.btnBorrow.TabIndex = 3;
+            this.btnBorrow.Text = "Borrow";
+            this.btnBorrow.UseVisualStyleBackColor = true;
+            // 
+            // btnReserve
+            // 
+            this.btnReserve.ForeColor = System.Drawing.Color.Black;
+            this.btnReserve.Location = new System.Drawing.Point(32, 248);
+            this.btnReserve.Name = "btnReserve";
+            this.btnReserve.Size = new System.Drawing.Size(120, 23);
+            this.btnReserve.TabIndex = 3;
+            this.btnReserve.Text = "Reserve This";
+            this.btnReserve.UseVisualStyleBackColor = true;
             // 
             // lblLocation
             // 
@@ -352,26 +372,6 @@
             this.label47.TabIndex = 1;
             this.label47.Text = "ing ani result, mag side to side sila tas baba";
             this.label47.Click += new System.EventHandler(this.lblUserName_Click);
-            // 
-            // btnReserve
-            // 
-            this.btnReserve.ForeColor = System.Drawing.Color.Black;
-            this.btnReserve.Location = new System.Drawing.Point(32, 248);
-            this.btnReserve.Name = "btnReserve";
-            this.btnReserve.Size = new System.Drawing.Size(120, 23);
-            this.btnReserve.TabIndex = 3;
-            this.btnReserve.Text = "Reserve This";
-            this.btnReserve.UseVisualStyleBackColor = true;
-            // 
-            // btnBorrow
-            // 
-            this.btnBorrow.ForeColor = System.Drawing.Color.Black;
-            this.btnBorrow.Location = new System.Drawing.Point(184, 248);
-            this.btnBorrow.Name = "btnBorrow";
-            this.btnBorrow.Size = new System.Drawing.Size(120, 23);
-            this.btnBorrow.TabIndex = 3;
-            this.btnBorrow.Text = "Borrow";
-            this.btnBorrow.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 

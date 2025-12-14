@@ -33,21 +33,19 @@ namespace LibraryManagementSystem
                 ExpirationDate = DateTime.Now.AddDays(150) //150 days from registration
 
             };
+
+            MessageBox.Show(
+               "Register Complete!",
+               "Success",
+               MessageBoxButtons.OK,
+               MessageBoxIcon.Information
+           ); //show if successful register
+
         }
 
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Register Complete!",
-                "Success",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            ); //show if successful register
-
-            FrmLogin login = new FrmLogin();
-            login.Show();
-
-            this.Close();
+ 
         }
 
         private void lnkLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

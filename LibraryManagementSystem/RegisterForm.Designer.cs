@@ -56,7 +56,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkLogin.AutoSize = true;
-            this.lnkLogin.Location = new System.Drawing.Point(214, 448);
+            this.lnkLogin.Location = new System.Drawing.Point(252, 448);
             this.lnkLogin.Name = "lnkLogin";
             this.lnkLogin.Size = new System.Drawing.Size(59, 13);
             this.lnkLogin.TabIndex = 26;
@@ -70,7 +70,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 448);
+            this.label1.Location = new System.Drawing.Point(114, 448);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 13);
             this.label1.TabIndex = 25;
@@ -135,7 +135,7 @@
             this.txtRegisterPassword.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtRegisterPassword.Location = new System.Drawing.Point(39, 299);
             this.txtRegisterPassword.Name = "txtRegisterPassword";
-            this.txtRegisterPassword.Size = new System.Drawing.Size(298, 20);
+            this.txtRegisterPassword.Size = new System.Drawing.Size(344, 20);
             this.txtRegisterPassword.TabIndex = 19;
             // 
             // txtRegisterEmail
@@ -146,7 +146,7 @@
             this.txtRegisterEmail.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtRegisterEmail.Location = new System.Drawing.Point(39, 207);
             this.txtRegisterEmail.Name = "txtRegisterEmail";
-            this.txtRegisterEmail.Size = new System.Drawing.Size(298, 20);
+            this.txtRegisterEmail.Size = new System.Drawing.Size(344, 20);
             this.txtRegisterEmail.TabIndex = 18;
             // 
             // lbl1
@@ -169,7 +169,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWelcome.AutoSize = true;
             this.lblWelcome.Font = new System.Drawing.Font("Arial Rounded MT Bold", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(33, 74);
+            this.lblWelcome.Location = new System.Drawing.Point(33, 64);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(206, 33);
             this.lblWelcome.TabIndex = 16;
@@ -192,7 +192,7 @@
             // 
             this.btnRegister.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(116, 383);
+            this.btnRegister.Location = new System.Drawing.Point(160, 394);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(129, 41);
             this.btnRegister.TabIndex = 14;
@@ -221,7 +221,7 @@
             this.txtUserName.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtUserName.Location = new System.Drawing.Point(39, 161);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(298, 20);
+            this.txtUserName.Size = new System.Drawing.Size(344, 20);
             this.txtUserName.TabIndex = 29;
             // 
             // label5
@@ -245,7 +245,7 @@
             this.txtConfimPassword.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtConfimPassword.Location = new System.Drawing.Point(39, 345);
             this.txtConfimPassword.Name = "txtConfimPassword";
-            this.txtConfimPassword.Size = new System.Drawing.Size(298, 20);
+            this.txtConfimPassword.Size = new System.Drawing.Size(344, 20);
             this.txtConfimPassword.TabIndex = 32;
             // 
             // label6
@@ -269,11 +269,10 @@
             "Student",
             "Faculty",
             "Staff ",
-            "Guest",
-            ""});
+            "Guest"});
             this.listRegisterType.Location = new System.Drawing.Point(40, 253);
             this.listRegisterType.Name = "listRegisterType";
-            this.listRegisterType.Size = new System.Drawing.Size(297, 17);
+            this.listRegisterType.Size = new System.Drawing.Size(343, 17);
             this.listRegisterType.TabIndex = 35;
             // 
             // frmRegister
@@ -302,6 +301,7 @@
             this.Controls.Add(this.btnRegister);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmRegister";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.RegisterForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

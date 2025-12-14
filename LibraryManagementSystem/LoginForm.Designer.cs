@@ -166,7 +166,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chckRememberMe.AutoSize = true;
-            this.chckRememberMe.Location = new System.Drawing.Point(57, 329);
+            this.chckRememberMe.Location = new System.Drawing.Point(67, 329);
             this.chckRememberMe.Name = "chckRememberMe";
             this.chckRememberMe.Size = new System.Drawing.Size(95, 17);
             this.chckRememberMe.TabIndex = 10;
@@ -179,7 +179,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkForgotPassword.AutoSize = true;
-            this.lnkForgotPassword.Location = new System.Drawing.Point(313, 333);
+            this.lnkForgotPassword.Location = new System.Drawing.Point(300, 333);
             this.lnkForgotPassword.Name = "lnkForgotPassword";
             this.lnkForgotPassword.Size = new System.Drawing.Size(92, 13);
             this.lnkForgotPassword.TabIndex = 11;
@@ -204,7 +204,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(297, 447);
+            this.linkLabel1.Location = new System.Drawing.Point(285, 447);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(45, 13);
             this.linkLabel1.TabIndex = 13;
