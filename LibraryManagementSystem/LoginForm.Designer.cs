@@ -1,4 +1,4 @@
-﻿namespace LibraryManagementSystem
+namespace LibraryManagementSystem
 {
     partial class FrmLogin
     {
