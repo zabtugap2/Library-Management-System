@@ -46,8 +46,8 @@
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblAccessionNumber = new System.Windows.Forms.Label();
+            this.pctBook = new System.Windows.Forms.PictureBox();
             this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -66,6 +66,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -84,6 +85,7 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -103,17 +105,14 @@
             this.label44 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pctBook = new System.Windows.Forms.PictureBox();
             this.pnlBookDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctBook)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctBook)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBookDetails
@@ -339,6 +338,16 @@
             this.lblAccessionNumber.Text = "Accession number";
             this.lblAccessionNumber.Click += new System.EventHandler(this.lblUserName_Click);
             // 
+            // pctBook
+            // 
+            this.pctBook.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pctBook.Location = new System.Drawing.Point(3, 3);
+            this.pctBook.Name = "pctBook";
+            this.pctBook.Size = new System.Drawing.Size(116, 115);
+            this.pctBook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pctBook.TabIndex = 0;
+            this.pctBook.TabStop = false;
+            // 
             // label46
             // 
             this.label46.AutoSize = true;
@@ -350,18 +359,6 @@
             this.label46.TabIndex = 1;
             this.label46.Text = "idk make this panel below duplicate , e code ata?";
             this.label46.Click += new System.EventHandler(this.lblUserName_Click);
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Font = new System.Drawing.Font("Nirmala UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.ForeColor = System.Drawing.Color.White;
-            this.label47.Location = new System.Drawing.Point(383, 9);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(253, 17);
-            this.label47.TabIndex = 1;
-            this.label47.Text = "ing ani result, mag side to side sila tas baba";
-            this.label47.Click += new System.EventHandler(this.lblUserName_Click);
             // 
             // panel1
             // 
@@ -586,6 +583,16 @@
             this.label15.Text = "Accession number";
             this.label15.Click += new System.EventHandler(this.lblUserName_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(116, 115);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
@@ -808,6 +815,16 @@
             this.label30.TabIndex = 1;
             this.label30.Text = "Accession number";
             this.label30.Click += new System.EventHandler(this.lblUserName_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(116, 115);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
             // 
             // panel3
             // 
@@ -1042,43 +1059,12 @@
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(116, 115);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(116, 115);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pctBook
-            // 
-            this.pctBook.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pctBook.Location = new System.Drawing.Point(3, 3);
-            this.pctBook.Name = "pctBook";
-            this.pctBook.Size = new System.Drawing.Size(116, 115);
-            this.pctBook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pctBook.TabIndex = 0;
-            this.pctBook.TabStop = false;
-            // 
             // frmBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(749, 613);
-            this.Controls.Add(this.label47);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -1089,16 +1075,16 @@
             this.Text = "frmBooks";
             this.pnlBookDetails.ResumeLayout(false);
             this.pnlBookDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctBook)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctBook)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1123,7 +1109,6 @@
         private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Label lvlAuthor1;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Button btnBorrow;
         private System.Windows.Forms.Button btnReserve;
         private System.Windows.Forms.Panel panel1;

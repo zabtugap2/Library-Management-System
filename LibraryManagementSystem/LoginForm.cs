@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Text.RegularExpressions;
-
-
 using System.Windows.Forms;
+using Microsoft.IdentityModel.Protocols;
 
 namespace LibraryManagementSystem
 {
@@ -111,6 +110,11 @@ namespace LibraryManagementSystem
             frmRegister register = new frmRegister();
             register.Show();
             this.Hide();
+        }
+
+        private void txtboxPasswordCredentials_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

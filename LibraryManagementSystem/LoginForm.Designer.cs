@@ -118,6 +118,7 @@ namespace LibraryManagementSystem
             this.txtboxPasswordCredentials.Name = "txtboxPasswordCredentials";
             this.txtboxPasswordCredentials.Size = new System.Drawing.Size(335, 20);
             this.txtboxPasswordCredentials.TabIndex = 6;
+            this.txtboxPasswordCredentials.TextChanged += new System.EventHandler(this.txtboxPasswordCredentials_TextChanged);
             // 
             // lbl2
             // 
