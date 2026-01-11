@@ -1,137 +1,207 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.IO;
 
 namespace LibraryManagementSystem.InterfaceAdmin
 {
     public partial class txtBookTitle : Form
     {
+        // 🔹 ADDED: store image path
+        private string imagePath = "";
+
         public txtBookTitle()
         {
             InitializeComponent();
         }
 
-        private void label12_Click(object sender, EventArgs e)
+        // ================= IMAGE UPLOAD =================
+        private void btnUpload_Click(object sender, EventArgs e)
         {
+            OpenFileDialog opnfd = new OpenFileDialog();
+            opnfd.Filter = "Image Files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
+            opnfd.Title = "Select Book Image";
+
+            if (opnfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (var fs = new FileStream(opnfd.FileName, FileMode.Open, FileAccess.Read))
+                    {
+                        pcBook.Image = Image.FromStream(fs);
+                    }
+
+                    imagePath = SaveBookImage(opnfd.FileName);
+                    // 🔹 SAVE PATH
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading image: " + ex.Message);
+                }
+            }
+        }
+        private string SaveBookImage(string sourcePath)
+        {
+            if (string.IsNullOrEmpty(sourcePath))
+                return "";
+
+            // Get the project root (two folders up from bin/Debug/netX)
+            string imagesFolder = Path.Combine(Environment.CurrentDirectory, "BookImages");
+            if (!Directory.Exists(imagesFolder))
+                Directory.CreateDirectory(imagesFolder);
+
+
+
+            //=========FutureImprovement======\\
+
+            //string fullPath = Path.Combine(Application.StartupPath, imagePath);
+            // pcBook.Image = Image.FromFile(fullPath); 
+
+
+                
+
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(sourcePath);
+            string destinationPath = Path.Combine(imagesFolder, fileName);
+
+            File.Copy(sourcePath, destinationPath, true);
+
+            // Return relative path for database
+            return Path.Combine("BookImages", fileName);
+
+
+
+
 
         }
 
-        private void btnUpload_Click(object sender, EventArgs e)
+
+        // ================= ADD BOOK =================
+        private void btnAddBook_Click(object sender, EventArgs e)
         {
+            // 🔹 BASIC VALIDATION
+            if (string.IsNullOrWhiteSpace(textBox1.Text) ||
+                string.IsNullOrWhiteSpace(txtAuthor.Text))
 
-            // 1. Create a new OpenFileDialog object
-            OpenFileDialog opnfd = new OpenFileDialog();
-
-            // 2. Set the file filter to only allow common image file types
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;*.gif;*.png)|*.jpg;*.jpeg;.*.gif;*.png|All files (*.*)|*.*";
-            opnfd.Title = "Select an Image File";
-
-            // 3. Show the dialog and check if the user clicked OK
-            if (opnfd.ShowDialog() == DialogResult.OK)
             {
+                MessageBox.Show("Book Title and Author are required.");
+                return;
+            }
+
+            try
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["LMSdb"].ConnectionString;
+
+
+                using (SqlConnection conn = new SqlConnection(connStr))
                 {
-                    try
-                    {
-                        // 4. Create a new Bitmap object from the selected file path
-                        // The Bitmap class is part of the System.Drawing namespace.
-                        Image selectedImage = Image.FromFile(opnfd.FileName);
+                    string query = @"
+                    INSERT INTO Books
+                    (Title, SubTitle, Author, Pages, ISBN, Location, Editor,
+                     AccessionNumber, PhysicalDescription, Publisher,
+                     PublicationYear, Edition, Language, AvailableCopies, BookImagePath)
+                    VALUES
+                    (@Title, @SubTitle, @Author, @Pages, @ISBN, @Location, @Editor,
+                     @AccessionNumber, @PhysicalDescription, @Publisher,
+                     @PublicationYear, @Edition, @Language, @AvailableCopies, @BookImagePath)";
 
-                        // 5. Assign the image to the PictureBox control to display it
-                        pcBook.Image = selectedImage;
+                    SqlCommand cmd = new SqlCommand(query, conn);
 
-                        // Optional: Store the file path if needed for saving/uploading later
-                        // txtFilePath.Text = opnfd.FileName; 
-                    }
-                    catch (Exception ex)
+                    cmd.Parameters.AddWithValue("@Title", textBox1.Text);
+                    cmd.Parameters.AddWithValue("@SubTitle", txtSubTitle.Text);
+                    cmd.Parameters.AddWithValue("@Author", txtAuthor.Text);
+                    cmd.Parameters.Add("@Pages", SqlDbType.Int).Value = int.TryParse(txtPages.Text, out int p) ? p : 0;
+                    cmd.Parameters.AddWithValue("@ISBN", txtISBN.Text);
+                    cmd.Parameters.AddWithValue("@Location", txtLocation.Text);
+                    cmd.Parameters.AddWithValue("@Editor", txtEditor.Text);
+                    cmd.Parameters.AddWithValue("@AccessionNumber", txtAccessionNumber.Text);
+                    cmd.Parameters.AddWithValue("@PhysicalDescription", txtPhysicalDescription.Text);
+                    cmd.Parameters.AddWithValue("@Publisher", txtPublisher.Text);
+                    cmd.Parameters.Add("@PublicationYear", SqlDbType.Int).Value = dtmPublicationYear.Value.Year;
+                    cmd.Parameters.AddWithValue("@Edition", txtEdition.Text);
+                    cmd.Parameters.AddWithValue("@Language", txtLanguage.Text);
+                    cmd.Parameters.Add("@AvailableCopies", SqlDbType.Int).Value = int.TryParse(txtCopies.Text, out int c) ? c : 1;
+
+                    if (!string.IsNullOrEmpty(imagePath) && !File.Exists(Path.Combine(Environment.CurrentDirectory, imagePath)))
                     {
-                        // Handle any errors (e.g., file is corrupt or in use)
-                        MessageBox.Show("Error loading image: " + ex.Message, "Error",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        imagePath = null;
                     }
+
+
+                    cmd.Parameters.AddWithValue("@BookImagePath",
+                    string.IsNullOrEmpty(imagePath) ? (object)DBNull.Value : imagePath);
+
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
                 }
 
+                MessageBox.Show("Book added successfully!");
+                ClearFields();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
 
+        // ================= CLEAR FORM =================
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearFields();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void ClearFields()
         {
-
+            textBox1.Clear();
+            txtSubTitle.Clear();
+            txtAuthor.Clear();
+            txtPages.Clear();
+            txtISBN.Clear();
+            txtLocation.Clear();
+            txtEditor.Clear();
+            txtAccessionNumber.Clear();
+            txtPhysicalDescription.Clear();
+            txtPublisher.Clear();
+            txtEdition.Clear();
+            txtLanguage.Clear();
+            txtCopies.Clear();
+            pcBook.Image = null;
+            imagePath = "";
+            dtmPublicationYear.Value = DateTime.Now;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
+        // ================= UNUSED EVENTS (SAFE TO KEEP) =================
+        private void label12_Click(object sender, EventArgs e) { }
+        private void label3_Click(object sender, EventArgs e) { }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
+        private void textBox1_TextChanged(object sender, EventArgs e) { }
+        private void textBox2_TextChanged(object sender, EventArgs e) { }
+        private void textBox3_TextChanged(object sender, EventArgs e) { }
+        private void textBox4_TextChanged(object sender, EventArgs e) { }
+        private void textBox5_TextChanged(object sender, EventArgs e) { }
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) { }
+        private void textBox6_TextChanged(object sender, EventArgs e) { }
+        private void textBox7_TextChanged(object sender, EventArgs e) { }
+        private void textBox8_TextChanged(object sender, EventArgs e) { }
+        private void textBox9_TextChanged(object sender, EventArgs e) { }
+        private void textBox10_TextChanged(object sender, EventArgs e) { }
+        private void textBox11_TextChanged(object sender, EventArgs e) { }
+        private void txtBookTitle_Load(object sender, EventArgs e) { }
 
+        private void btnRemovePhoto_Click(object sender, EventArgs e)
+        {
+            pcBook.Image = null;
+            imagePath = "";
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox10_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox11_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAddBook_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
