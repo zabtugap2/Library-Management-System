@@ -49,7 +49,8 @@ namespace LibraryManagementSystem.InterfaceAdmin
                 return "";
 
             // Get the project root (two folders up from bin/Debug/netX)
-            string imagesFolder = Path.Combine(Environment.CurrentDirectory, "BookImages");
+            string imagesFolder = Path.Combine(Application.StartupPath, "BookImages");
+
             if (!Directory.Exists(imagesFolder))
                 Directory.CreateDirectory(imagesFolder);
 
@@ -98,14 +99,17 @@ namespace LibraryManagementSystem.InterfaceAdmin
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     string query = @"
-                    INSERT INTO Books
-                    (Title, SubTitle, Author, Pages, ISBN, Location, Editor,
-                     AccessionNumber, PhysicalDescription, Publisher,
-                     PublicationYear, Edition, Language, AvailableCopies, BookImagePath)
-                    VALUES
-                    (@Title, @SubTitle, @Author, @Pages, @ISBN, @Location, @Editor,
-                     @AccessionNumber, @PhysicalDescription, @Publisher,
-                     @PublicationYear, @Edition, @Language, @AvailableCopies, @BookImagePath)";
+INSERT INTO Books
+(Title, SubTitle, Author, Pages, ISBN, Location, Editor,
+ AccessionNumber, PhysicalDescription, Publisher,
+ PublicationYear, Edition, Language, AvailableCopies, BookImagePath)
+VALUES
+(@Title, @SubTitle, @Author, @Pages, @ISBN, @Location, @Editor,
+ @AccessionNumber, @PhysicalDescription, @Publisher,
+ @PublicationYear, @Edition, @Language, @AvailableCopies, @BookImagePath);
+
+SELECT SCOPE_IDENTITY();";
+
 
                     SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -135,8 +139,29 @@ namespace LibraryManagementSystem.InterfaceAdmin
 
 
                     conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+
+                    // START TRANSACTION
+                    SqlTransaction tran = conn.BeginTransaction();
+
+                    // attach transaction to first command
+                    cmd.Transaction = tran;
+
+                    // INSERT BOOK
+                    int newBookId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    // LOG ACTIVITY
+                    string logQuery = @"
+INSERT INTO BookActivityLogs (BookID, AdminID, Action)
+VALUES (@BookID, @AdminID, 'Added')";
+
+                    SqlCommand logCmd = new SqlCommand(logQuery, conn, tran);
+                    logCmd.Parameters.AddWithValue("@BookID", newBookId);
+                    logCmd.Parameters.AddWithValue("@AdminID", LoggedInUser.UserID);
+                    logCmd.ExecuteNonQuery();
+
+                    // COMMIT TRANSACTION
+                    tran.Commit();
+
                 }
 
                 MessageBox.Show("Book added successfully!");

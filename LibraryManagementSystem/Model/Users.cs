@@ -16,6 +16,10 @@ namespace LibraryManagementSystem.Model
          public DateTime ExpirationDate { get; set; }
          public DateTime RegistrationDate { get; set; }
 
+        public string ProfileImagePath { get; set; }
+        
+
+
     }
 
 }

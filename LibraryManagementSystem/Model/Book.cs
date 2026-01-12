@@ -26,8 +26,10 @@ namespace LibraryManagementSystem.Model
             public string AccessionNumber { get; set; }
 
             // Optional if you store images
-            public byte[] CoverImage { get; set; }
-        }
+         
+        public string BookImagePath { get; set; }
+        public string Category { get; set; }
+    }
 
     }
 

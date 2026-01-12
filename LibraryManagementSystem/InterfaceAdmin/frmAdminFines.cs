@@ -162,6 +162,7 @@ namespace LibraryManagementSystem.InterfaceAdmin
             END AS ChargeType,
             p.AmountPaid AS Amount,
             p.PaymentMethod,
+            p.ProofImagePath,
             p.Status,
             p.PaymentDate
         FROM Payments p
@@ -176,13 +177,44 @@ namespace LibraryManagementSystem.InterfaceAdmin
 
                 dgvAllPayments.DataSource = dt;
 
+                if (!dgvAllPayments.Columns.Contains("btnViewProof"))
+                {
+                    DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+                    btn.Name = "btnViewProof";
+                    btn.HeaderText = "Proof";
+                    btn.Text = "View";
+                    btn.UseColumnTextForButtonValue = true;
+                    dgvAllPayments.Columns.Add(btn);
+                }
+
                 ApplyPaymentsGridStyle();
-                
+
 
 
                 dgvAllPayments.Columns["Amount"].DefaultCellStyle.Format = "₱#,##0.00";
                 dgvAllPayments.Columns["Status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgvAllPayments.Columns["PaymentID"].Visible = false;
+                dgvAllPayments.Columns["ProofImagePath"].Visible = false;
+
+
+                // 🔒 Disable View button for non-GCash or no proof
+                foreach (DataGridViewRow row in dgvAllPayments.Rows)
+                {
+                    string method = row.Cells["PaymentMethod"].Value?.ToString();
+                    string proof = row.Cells["ProofImagePath"].Value?.ToString();
+
+                    if (method == "Gcash" && !string.IsNullOrEmpty(proof))
+                    {
+                        row.Cells["btnViewProof"].Value = "View";
+                        row.Cells["btnViewProof"].ReadOnly = false;
+                    }
+                    else
+                    {
+                        row.Cells["btnViewProof"].Value = "";
+                        row.Cells["btnViewProof"].ReadOnly = true;
+                    }
+                }
+
             }
         }
 
@@ -260,7 +292,8 @@ namespace LibraryManagementSystem.InterfaceAdmin
                 decimal amount = Convert.ToDecimal(r["AmountPaid"]);
                 string method = r["PaymentMethod"].ToString();
                 DateTime date = Convert.ToDateTime(r["PaymentDate"]);
-                int receiptNo = Convert.ToInt32(r["PaymentID"]);
+                string receiptNo = "OR-" + DateTime.Now.Year + "-" + paymentId.ToString("D5");
+
 
                 r.Close();
 
@@ -296,6 +329,9 @@ namespace LibraryManagementSystem.InterfaceAdmin
                 doc.Close();
 
                 MessageBox.Show("Official receipt generated:\n" + filePath);
+
+                System.Diagnostics.Process.Start(filePath);
+
             }
         }
 
@@ -412,6 +448,27 @@ namespace LibraryManagementSystem.InterfaceAdmin
             DataGridViewRow row = dgvAllPayments.Rows[e.RowIndex];
             if (row.IsNewRow) return;
             if (row.Cells["PaymentID"].Value == DBNull.Value) return;
+
+            // 👁 VIEW PROOF BUTTON
+            if (dgvAllPayments.Columns[e.ColumnIndex].Name == "btnViewProof")
+            {
+                string proofPath = row.Cells["ProofImagePath"].Value?.ToString();
+
+                if (string.IsNullOrEmpty(proofPath))
+                {
+                    MessageBox.Show("No proof uploaded for this payment.");
+                    return;
+                }
+
+                if (!System.IO.File.Exists(proofPath))
+                {
+                    MessageBox.Show("Proof image file not found.");
+                    return;
+                }
+
+                System.Diagnostics.Process.Start(proofPath);
+                return; // ⛔ stop further processing
+            }
 
             selectedPaymentId = Convert.ToInt32(row.Cells["PaymentID"].Value);
             selectedPaymentStatus = row.Cells["Status"].Value.ToString();

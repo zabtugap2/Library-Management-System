@@ -39,22 +39,24 @@
             this.tblBooks.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblBooks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblBooks.Location = new System.Drawing.Point(0, 0);
+            this.tblBooks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tblBooks.Name = "tblBooks";
             this.tblBooks.RowCount = 2;
             this.tblBooks.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblBooks.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblBooks.Size = new System.Drawing.Size(749, 613);
+            this.tblBooks.Size = new System.Drawing.Size(999, 754);
             this.tblBooks.TabIndex = 0;
             this.tblBooks.Paint += new System.Windows.Forms.PaintEventHandler(this.tblBooks_Paint);
             // 
             // frmBooks
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(749, 613);
+            this.ClientSize = new System.Drawing.Size(999, 754);
             this.Controls.Add(this.tblBooks);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmBooks";
             this.Text = "frmBooks";
             this.Load += new System.EventHandler(this.frmBooks_Load);
