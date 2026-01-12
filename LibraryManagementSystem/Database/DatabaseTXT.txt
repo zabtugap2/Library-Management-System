@@ -1,7 +1,7 @@
 /* ================================
    CREATE DATABASE
 ================================ */
-/* CREATE DATABASE LibraryDb;*/
+ CREATE DATABASE LibraryDb;
 GO
 USE LibraryDb;
 GO
@@ -18,7 +18,18 @@ CREATE TABLE Users (
     ExpirationDate DATE NOT NULL,
     RegistrationDate DATE DEFAULT GETDATE()
 );
+
+
+ALTER TABLE Users
+ADD   Address VARCHAR(255),
+    Contact VARCHAR(50),
+    ProfileImagePath VARCHAR(255);
+
+    ALTER TABLE Users
+ADD Status VARCHAR(20) NOT NULL DEFAULT 'Pending';
+
 GO
+
 
 CREATE INDEX idx_users_membertype ON Users(MemberType);
 GO
@@ -43,11 +54,32 @@ CREATE TABLE Books (
     Language VARCHAR(50),
     AvailableCopies INT DEFAULT 1
 );
-GO
+
+ALTER TABLE Books
+ADD BookImagePath VARCHAR(255);
+
+ALTER TABLE Books ADD Category VARCHAR(100);
+
+ALTER TABLE Books
+ADD Status VARCHAR(50) NOT NULL DEFAULT 'Available';
+
 
 CREATE INDEX idx_books_title ON Books(Title);
 CREATE INDEX idx_books_author ON Books(Author);
 GO
+
+
+CREATE TABLE BookActivityLogs (
+    LogID INT IDENTITY PRIMARY KEY,
+    BookID INT NOT NULL,
+    AdminID INT NOT NULL,
+    Action VARCHAR(50) NOT NULL, -- Added / Updated / Deleted
+    ActionDate DATETIME DEFAULT GETDATE(),
+
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (AdminID) REFERENCES Users(UserID)
+);
+
 
 /* ================================
    BOOK BORROW
@@ -66,6 +98,10 @@ CREATE TABLE BookBorrow (
     CONSTRAINT fk_borrow_book FOREIGN KEY (BookID)
         REFERENCES Books(BookID)
 );
+
+ALTER TABLE BookBorrow ADD Status VARCHAR(20);
+
+
 GO
 
 CREATE INDEX idx_borrow_user ON BookBorrow(UserID);
@@ -143,3 +179,219 @@ JOIN BookReturn r ON b.BorrowID = r.BorrowID
 JOIN Users u ON b.UserID = u.UserID
 WHERE r.ReturnDate > b.DueDate;
 GO
+
+CREATE TABLE Fines (
+    FineID INT IDENTITY PRIMARY KEY,
+    UserID INT NOT NULL,
+    BorrowID INT NOT NULL,
+    DaysLate INT NOT NULL,
+    DailyRate DECIMAL(10,2) NOT NULL,
+    FineAmount DECIMAL(10,2) NOT NULL,
+    IsCleared BIT DEFAULT 0,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (BorrowID) REFERENCES BookBorrow(BorrowID)
+);
+ALTER TABLE Fines ADD IsLost BIT DEFAULT 0;
+ALTER TABLE Fines
+ADD RemainingAmount DECIMAL(10,2);
+
+UPDATE Fines
+SET RemainingAmount = FineAmount
+WHERE RemainingAmount IS NULL;
+
+
+
+
+
+CREATE TABLE Payments (
+    PaymentID INT IDENTITY PRIMARY KEY,
+    FineID INT NOT NULL,
+    UserID INT NOT NULL,
+    AmountPaid DECIMAL(10,2) NOT NULL,
+    PaymentMethod VARCHAR(20),
+    PaymentDate DATETIME DEFAULT GETDATE(),
+
+    FOREIGN KEY (FineID) REFERENCES Fines(FineID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+ALTER TABLE Payments
+ADD Status VARCHAR(20) NOT NULL DEFAULT 'Pending';
+ALTER TABLE Payments
+ALTER COLUMN FineID INT NULL;
+
+ALTER TABLE Payments
+ALTER COLUMN OtherChargeID INT NULL;
+
+ALTER TABLE Payments
+ADD CONSTRAINT FK_Payments_OtherCharges
+FOREIGN KEY (OtherChargeID) REFERENCES OtherCharges(OtherChargeID);
+
+ALTER TABLE Payments
+ADD ProofImagePath VARCHAR(255),
+    GCashReference VARCHAR(50);
+
+
+
+
+    CREATE TABLE OtherCharges
+(
+    OtherChargeID INT IDENTITY(1,1) PRIMARY KEY, 
+    UserID INT NOT NULL,                         
+    ChargeType VARCHAR(50) NOT NULL,              
+    BookID INT NULL,                               
+    Amount DECIMAL(10,2) NOT NULL,                
+    Status VARCHAR(20) NOT NULL DEFAULT 'Pending',
+    ChargeDate DATETIME NOT NULL DEFAULT GETDATE()
+)
+
+
+
+
+CREATE TABLE FineWaivers (
+    WaiverID INT IDENTITY PRIMARY KEY,
+    FineID INT NOT NULL,
+    AdminID INT NOT NULL,
+    Reason VARCHAR(255),
+    WaivedAmount DECIMAL(10,2),
+    WaiverDate DATETIME DEFAULT GETDATE(),
+
+    FOREIGN KEY (FineID) REFERENCES Fines(FineID),
+    FOREIGN KEY (AdminID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE WaiverRequests (
+    RequestID INT IDENTITY PRIMARY KEY,
+    FineID INT NOT NULL,
+    UserID INT NOT NULL,
+    Reason VARCHAR(255),
+    RequestDate DATETIME DEFAULT GETDATE(),
+    Status VARCHAR(20) DEFAULT 'Pending',
+
+    FOREIGN KEY (FineID) REFERENCES Fines(FineID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE ProfileUpdateRequests (
+    RequestID INT IDENTITY PRIMARY KEY,
+    UserID INT NOT NULL,
+
+    NewUserName VARCHAR(100),
+    NewEmail VARCHAR(150),
+    NewAddress VARCHAR(255),
+    NewContact VARCHAR(50),
+    NewProfileImagePath VARCHAR(255),
+
+    Status VARCHAR(20) DEFAULT 'Pending',
+    RequestDate DATETIME DEFAULT GETDATE(),
+
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE OfficialReceipts (
+    ReceiptID INT IDENTITY PRIMARY KEY,
+    PaymentID INT NOT NULL,
+    ReceiptNumber VARCHAR(50) UNIQUE,
+    IssuedBy INT NOT NULL,
+    IssuedDate DATETIME DEFAULT GETDATE(),
+
+    FOREIGN KEY (PaymentID) REFERENCES Payments(PaymentID),
+    FOREIGN KEY (IssuedBy) REFERENCES Users(UserID)
+);
+
+
+
+UPDATE Users
+SET MemberType = 'Admin'
+WHERE UserName = 'Admin';
+
+select * from dbo.Users; 
+SELECT * FROM BookBorrow;
+
+
+SELECT
+    br.BorrowID,
+    br.UserID,
+    br.BookID
+FROM BookBorrow br;
+
+
+SELECT
+    u.UserName,
+    b.Title,
+    br.BorrowDate
+FROM BookBorrow br
+LEFT JOIN Users u ON br.UserID = u.UserID
+LEFT JOIN Books b ON br.BookID = b.BookID;
+
+
+
+SELECT * FROM Users;
+SELECT * FROM BookBorrow;
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'Books';
+
+
+SELECT * FROM BookReservation;
+
+
+-- Check Fines table
+SELECT TOP 1 * FROM Fines;
+
+
+
+-- Check Payments table
+SELECT * FROM users;
+
+UPDATE Users
+SET Status = 'Active'
+WHERE UserName = 'Admin';
+
+
+SELECT TOP 1 * FROM OtherCharges;
+
+
+SELECT 
+    PaymentID,
+    FineID,
+    UserID,
+    AmountPaid,
+    Status,
+    PaymentDate
+FROM Payments;
+
+UPDATE Payments
+SET Status = 'Pending'
+WHERE PaymentID =  3;
+
+
+
+UPDATE Fines
+SET RemainingAmount = FineAmount,
+    IsCleared = 0
+WHERE FineID = (
+    SELECT FineID FROM Payments WHERE PaymentID = 3
+);
+
+ALTER TABLE Payments
+DROP COLUMN ProofImage;
+
+SELECT * FROM Payments;
+
+
+
+
